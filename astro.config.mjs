@@ -88,9 +88,9 @@ export default defineConfig({
           label: "Code snippets",
           items: [
             // Each item here is one entry in the navigation menu.
-            { label: "Level 1", link: "/guides/one/" },
-            { label: "Level 2", link: "/guides/two/" },
-            { label: "Level 3", link: "/guides/three/" },
+            { label: "Level 1", link: "/guides/snippets/one/" },
+            { label: "Level 2", link: "/guides/snippets/two/" },
+            { label: "Level 3", link: "/guides/snippets/three/" },
             { label: "Level 4", link: "/guides/snippets/four/" },
           ],
         },
