@@ -25,14 +25,14 @@ export default defineConfig({
           label: "General",
           items: [
             // Each item here is one entry in the navigation menu.
-            { label: "Example Guide", link: "/guides/example/" },
+            { label: "Level 1", link: "/guides/general/general/" },
           ],
         },
         {
           label: "HTML",
           items: [
             // Each item here is one entry in the navigation menu.
-            { label: "Example Guide", link: "/guides/example/" },
+            { label: "Level 1", link: "/guides/html/html" },
           ],
         },
         {
