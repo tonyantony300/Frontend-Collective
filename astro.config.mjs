@@ -18,14 +18,8 @@ export default defineConfig({
           label: "Cool off",
           items: [
             // Each item here is one entry in the navigation menu.
-            { label: "Lets start with this", link: "/guides/cool/cooloff/" },
-          ],
-        },
-        {
-          label: "General",
-          items: [
-            // Each item here is one entry in the navigation menu.
-            { label: "Level 1", link: "/guides/general/general/" },
+            { label: "Motivation", link: "/guides/cool/cooloff/" },
+            { label: "General", link: "/guides/general/general/" },
           ],
         },
         {

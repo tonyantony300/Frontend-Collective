@@ -5,7 +5,7 @@ description: Closure, Debounce, Throttling
 
 ### Closure
 
-```
+```js
 function outerFunction(){
     const test = "This is a messgae from the outer context"
     
@@ -24,7 +24,7 @@ closure();
 
 ### Debounce
 
-```
+```js
 const debounce = (func, delay = 300) =>{
     let timer;
     return (...args) => {
