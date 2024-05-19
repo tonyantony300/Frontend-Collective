@@ -5,7 +5,7 @@ import starlight from "@astrojs/starlight";
 export default defineConfig({
   integrations: [
     starlight({
-      title: "Frontend Question Bank",
+      title: "Frontend Collective",
       sidebar: [
         {
           label: "Introduction",
