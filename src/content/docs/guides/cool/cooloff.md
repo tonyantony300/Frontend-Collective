@@ -7,6 +7,8 @@ description: A guide in my new Starlight docs site.
 Below are open-ended questions intended to put candidates' minds at ease. There are no right answers here.
 
 
+**Although, Be prepared to talk about your past projects and how you approached solving various challenges.**
+
 
 ### Recent works
 What is a cool project that you’ve recently worked on?

@@ -1,5 +1,5 @@
 ---
-title: Level 1
+title: Chapter One
 description: Easy code snippets
 ---
 

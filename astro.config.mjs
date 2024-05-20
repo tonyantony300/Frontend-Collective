@@ -11,7 +11,7 @@ export default defineConfig({
           label: "Introduction",
           items: [
             // Each item here is one entry in the navigation menu.
-            { label: "Welcome", link: "/guides/one/" },
+            { label: "Welcome", link: "/guides/cool/direction/" },
           ],
         },
         {
@@ -26,7 +26,7 @@ export default defineConfig({
           label: "HTML",
           items: [
             // Each item here is one entry in the navigation menu.
-            { label: "Level 1", link: "/guides/html/html" },
+            { label: "Chapter One", link: "/guides/html/html" },
           ],
         },
         {
@@ -40,7 +40,32 @@ export default defineConfig({
           label: "Javascript",
           items: [
             // Each item here is one entry in the navigation menu.
+            { label: "Chapter One", link: "/guides/js/js/" },
+          ],
+        },
+
+        {
+          label: "React",
+          items: [
+            // Each item here is one entry in the navigation menu.
             { label: "Example Guide", link: "/guides/example/" },
+          ],
+        },
+        {
+          label: "Code snippets",
+          items: [
+            // Each item here is one entry in the navigation menu.
+            { label: "Chapter One", link: "/guides/snippets/one/" },
+            { label: "Level 2", link: "/guides/snippets/two/" },
+            { label: "Level 3", link: "/guides/snippets/three/" },
+            { label: "Level 4", link: "/guides/snippets/four/" },
+          ],
+        },
+        {
+          label: "Important Concepts",
+          items: [
+            // Each item here is one entry in the navigation menu.
+            { label: "Event Loop", link: "/guides/concepts/concepts/" },
           ],
         },
         {
@@ -69,23 +94,6 @@ export default defineConfig({
           items: [
             // Each item here is one entry in the navigation menu.
             { label: "Example Guide", link: "/guides/example/" },
-          ],
-        },
-        {
-          label: "React",
-          items: [
-            // Each item here is one entry in the navigation menu.
-            { label: "Example Guide", link: "/guides/example/" },
-          ],
-        },
-        {
-          label: "Code snippets",
-          items: [
-            // Each item here is one entry in the navigation menu.
-            { label: "Level 1", link: "/guides/snippets/one/" },
-            { label: "Level 2", link: "/guides/snippets/two/" },
-            { label: "Level 3", link: "/guides/snippets/three/" },
-            { label: "Level 4", link: "/guides/snippets/four/" },
           ],
         },
       ],
