@@ -43,24 +43,25 @@ export default defineConfig({
             { label: "Chapter One", link: "/guides/js/js/" },
           ],
         },
-
-        {
-          label: "React",
-          items: [
-            // Each item here is one entry in the navigation menu.
-            { label: "Example Guide", link: "/guides/example/" },
-          ],
-        },
         {
           label: "Code snippets",
           items: [
             // Each item here is one entry in the navigation menu.
             { label: "Chapter One", link: "/guides/snippets/one/" },
-            { label: "Level 2", link: "/guides/snippets/two/" },
-            { label: "Level 3", link: "/guides/snippets/three/" },
-            { label: "Level 4", link: "/guides/snippets/four/" },
+            { label: "Chapter Two", link: "/guides/snippets/two/" },
+            { label: "Chapter Three", link: "/guides/snippets/three/" },
+            { label: "Chapter Four", link: "/guides/snippets/four/" },
           ],
         },
+
+        {
+          label: "Modern Frameworks",
+          items: [
+            // Each item here is one entry in the navigation menu.
+            { label: "Introduction", link: "/guides/frameworks/intro/" },
+          ],
+        },
+
         {
           label: "Important Concepts",
           items: [
