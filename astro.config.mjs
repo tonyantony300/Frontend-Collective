@@ -40,7 +40,8 @@ export default defineConfig({
           label: "Javascript",
           items: [
             // Each item here is one entry in the navigation menu.
-            { label: "Chapter One", link: "/guides/js/js/" },
+            { label: "Chapter One", link: "/guides/js/one/" },
+            { label: "Chapter Two", link: "/guides/js/two/" },
           ],
         },
         {
@@ -66,7 +67,7 @@ export default defineConfig({
           label: "Important Concepts",
           items: [
             // Each item here is one entry in the navigation menu.
-            { label: "Event Loop", link: "/guides/concepts/concepts/" },
+            { label: "concepts", link: "/guides/concepts/concepts/" },
           ],
         },
         {

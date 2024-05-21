@@ -6,6 +6,12 @@ description: This should be comprehensive
 
 ## Array methods
 
+<!-- Addd images from assets -->
+
+![set one](../../../../assets//methods1.png)
+
+![set two](../../../../assets//methods2.jpeg)
+
 
 ### The .map() method
 
@@ -87,3 +93,18 @@ console.log(totalAge)
 ```
 
 Here, the currentObj is the object that is being iterated over. Also, the acc value stores the result and is outputted finally into the totalAge array.
+
+
+
+### 
+
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+
+
+</div>
+</details>
+
