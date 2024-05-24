@@ -291,7 +291,7 @@ bolt.makeSound(); // "The Dog makes a sound."
 
 
 
-### Step 1: Create a Parent Object Constructor
+#### Step 1: Create a Parent Object Constructor
 
 ```javascript
 function Animal(name) {
@@ -301,7 +301,7 @@ function Animal(name) {
 - When you create a new instance of `Animal` using `new Animal('Name')`, the `this` inside the `Animal` constructor refers to the new object being created.
 - The line `this.name = name;` sets the `name` property of the new object to the value passed as an argument.
 
-### Step 2: Add a Method to the Parent Object's Prototype
+#### Step 2: Add a Method to the Parent Object's Prototype
 
 ```javascript
 Animal.prototype.makeSound = function () {
@@ -312,7 +312,7 @@ Animal.prototype.makeSound = function () {
 - When you call `makeSound` on an instance of `Animal` (or any object that inherits from `Animal`), `this` inside the method refers to the object on which the method was called.
 - `this.constructor.name` gets the name of the constructor function that created the object, which will be `Animal` or any subclass like `Dog`.
 
-### Step 3: Create a Child Object Constructor
+#### Step 3: Create a Child Object Constructor
 
 ```javascript
 function Dog(name) {
@@ -323,7 +323,7 @@ function Dog(name) {
 - `Animal.call(this, name);` calls the `Animal` constructor function with `this` set to the new `Dog` object.
 - This means `this.name = name;` inside the `Animal` constructor sets the `name` property of the new `Dog` object to 'Bolt'.
 
-### Step 4: Set the Child Object's Prototype
+#### Step 4: Set the Child Object's Prototype
 
 ```javascript
 Object.setPrototypeOf(Dog.prototype, Animal.prototype);
@@ -331,7 +331,7 @@ Object.setPrototypeOf(Dog.prototype, Animal.prototype);
 - `Object.setPrototypeOf(Dog.prototype, Animal.prototype);` sets up the prototype chain so that `Dog.prototype` inherits from `Animal.prototype`.
 - This means any instance of `Dog` will have access to methods defined on `Animal.prototype`, like `makeSound`.
 
-### Step 5: Add a Method to the Child Object's Prototype
+#### Step 5: Add a Method to the Child Object's Prototype
 
 ```javascript
 Dog.prototype.bark = function () {
@@ -341,7 +341,7 @@ Dog.prototype.bark = function () {
 - The `bark` method is added to `Dog.prototype`.
 - When you call `bark` on an instance of `Dog`, `this` inside the method refers to the `Dog` object on which the method was called.
 
-### Step 6: Create an Instance of the Child Object
+#### Step 6: Create an Instance of the Child Object
 
 ```javascript
 const bolt = new Dog('Bolt');
@@ -349,7 +349,7 @@ const bolt = new Dog('Bolt');
 - `new Dog('Bolt')` creates a new instance of `Dog`.
 - Inside the `Dog` constructor, `Animal.call(this, name)` sets `this.name` to 'Bolt' for the new `Dog` object.
 
-### Step 7: Call Methods on the Child Object
+#### Step 7: Call Methods on the Child Object
 
 ```javascript
 console.log(bolt.name); // "Bolt"
@@ -360,7 +360,7 @@ bolt.bark(); // "Woof!"
 - `bolt.makeSound()` calls the `makeSound` method from `Animal.prototype`. Here, `this` refers to `bolt`, and `this.constructor.name` is 'Dog', so it logs "The Dog makes a sound."
 - `bolt.bark()` calls the `bark` method from `Dog.prototype`. Here, `this` refers to `bolt`, and it logs "Woof!".
 
-### Summary of `this` in Each Step
+#### Summary of `this` in Each Step
 
 1. **Inside `Animal` constructor:** `this` refers to the new `Animal` (or `Dog`) instance being created.
 2. **Inside `makeSound` method:** `this` refers to the instance (e.g., `bolt`) on which the method is called.
@@ -474,6 +474,132 @@ console.log(person); // Person { name: "John" }
 console.log(person.name); // "john"
 ```
 
+
+
+</div>
+</details>
+
+
+### What's the difference between a variable that is: null, undefined or undeclared? How would you go about checking for any of these states?
+
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+Undeclared variables are created when you assign a value to an identifier that is not previously created using var, let or const. Undeclared variables will be defined globally, outside of the current scope. In strict mode, a ReferenceError will be thrown when you try to assign to an undeclared variable. Undeclared variables are bad just like how global variables are bad. Avoid them at all cost! To check for them, wrap its usage in a try/catch block.
+
+```js
+function foo() {
+  x = 1; // Throws a ReferenceError in strict mode
+}
+
+foo();
+console.log(x); // 1
+```
+
+A variable that is undefined is a variable that has been declared, but not assigned a value. It is of type undefined. If a function does not return any value as the result of executing it is assigned to a variable, the variable also has the value of undefined. To check for it, compare using the strict equality (===) operator or typeof which will give the 'undefined' string. Note that you should not be using the abstract equality operator to check, as it will also return true if the value is null.
+
+A variable that is null will have been explicitly assigned to the null value. It represents no value and is different from undefined in the sense that it has been explicitly assigned. To check for null, simply compare using the strict equality operator. Note that like the above, you should not be using the abstract equality operator (==) to check, as it will also return true if the value is undefined.
+
+As a personal habit, I never leave my variables undeclared or unassigned. I will explicitly assign null to them after declaring if I don't intend to use it yet. If you use a linter in your workflow, it will usually also be able to check that you are not referencing undeclared variables.
+
+</div>
+</details>
+
+### What is a closure, and how/why would you use one?
+
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+A closure is the combination of a function and the lexical environment within which that function was declared. The word "lexical" refers to the fact that lexical scoping uses the location where a variable is declared within the source code to determine where that variable is available. Closures are functions that have access to the outer (enclosing) function's variables—scope chain even after the outer function has returned.
+
+Why would you use one?
+
+Data privacy / emulating private methods with closures. Commonly used in the [module pattern](https://www.patterns.dev/vanilla/module-pattern).
+
+
+</div>
+</details>
+
+### When would you use document.write()??
+
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+
+document.write() writes a string of text to a document stream opened by document.open(). When document.write() is executed after the page has loaded, it will call document.open which clears the whole document (<head> and <body> removed!) and replaces the contents with the given parameter value. Hence it is usually considered dangerous and prone to misuse.
+
+</div>
+</details>
+
+### What's the difference between feature detection, feature inference, and using the UA string??
+
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+Feature detection involves working out whether a browser supports a certain block of code, and running different code depending on whether it does (or doesn't), so that the browser can always provide a working experience rather crashing/erroring in some browsers. For example:
+```js
+
+if ('geolocation' in navigator) {
+  // Can use navigator.geolocation
+} else {
+  // Handle lack of feature
+}
+```
+
+Feature Inference
+
+Feature inference checks for a feature just like feature detection, This is not really recommended. Feature detection is more foolproof.
+
+UA String - User Agent String
+
+This is a browser-reported string that allows the network protocol peers to identify the application type, operating system, software vendor or software version of the requesting software user agent. It can be accessed via navigator.userAgent. However, the string is tricky to parse and can be spoofed. For example, Chrome reports both as Chrome and Safari. So to detect Safari you have to check for the Safari string and the absence of the Chrome string. Avoid this method.
+
+</div>
+</details>
+
+### Explain Ajax in as much detail as possible?
+
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+Ajax (asynchronous JavaScript and XML) is a set of web development techniques using many web technologies on the client side to create asynchronous web applications. With Ajax, web applications can send data to and retrieve from a server asynchronously (in the background) without interfering with the display and behavior of the existing page. By decoupling the data interchange layer from the presentation layer, Ajax allows for web pages, and by extension web applications, to change content dynamically without the need to reload the entire page. In practice, modern implementations commonly use JSON instead of XML, due to the advantages of JSON being native to JavaScript.
+
+The `XMLHttpRequest` API is frequently used for the asynchronous communication or these days, the fetch `API`.
+
+</div>
+</details>
+
+### What are the advantages and disadvantages of using Ajax?
+
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+Advantages
+
+- Better interactivity. New content from the server can be changed dynamically without the need to reload the entire page.
+- Reduce connections to the server since scripts and stylesheets only have to be requested once.
+- State can be maintained on a page. JavaScript variables and DOM state will persist because the main container page was not reloaded.
+- Basically most of the advantages of an SPA.
+
+Disadvantages
+
+- Dynamic webpages are harder to bookmark.
+- Does not work if JavaScript has been disabled in the browser.
+- Some webcrawlers do not execute JavaScript and would not see content that has been loaded by JavaScript.
+- Webpages using Ajax to fetch data will likely have to combine the fetched remote data with client-side templates to update the DOM. For this to happen, JavaScript will have to be parsed and executed on the browser, and low-end mobile devices might struggle with this.
+- Basically most of the disadvantages of an SPA.
 
 
 </div>

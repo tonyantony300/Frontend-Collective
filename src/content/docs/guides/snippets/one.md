@@ -275,3 +275,165 @@ b defined? true
 Explanation: Inside the immediately-invoked function expression (IIFE), `a` is declared with `var`, making it local to the function scope and undefined outside of it. However, `b` is assigned without being declared with `var`, `let`, or `const`, implicitly creating a global variable. Thus, outside
 
 </details>
+
+### Make this work
+
+**Task:** Make this work:
+```js
+duplicate([1,2,3,4,5]); // [1,2,3,4,5,1,2,3,4,5]
+```
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+<p>
+
+To make this work, you can create a function `duplicate` that concatenates the array with itself using the `concat` method.
+
+```js
+function duplicate(arr) {
+    return arr.concat(arr);
+}
+
+// Example usage
+console.log(duplicate([1, 2, 3, 4, 5])); // [1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
+```
+</p>
+</div>
+</details>
+
+### FizzBuzz
+
+**Task:** Create a for loop that iterates up to 100 while outputting “fizz” at multiples of 3, “buzz” at multiples of 5 and “fizzbuzz” at multiples of 3 and 5
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+<p>
+
+You can achieve this with the following for loop:
+
+```js
+for (let i = 1; i <= 100; i++) {
+    if (i % 3 === 0 && i % 5 === 0) {
+        console.log('fizzbuzz');
+    } else if (i % 3 === 0) {
+        console.log('fizz');
+    } else if (i % 5 === 0) {
+        console.log('buzz');
+    } else {
+        console.log(i);
+    }
+}
+```
+</p>
+</div>
+</details>
+
+### Logical Operators
+
+**Task:** What will be returned by each of these?
+```js
+console.log("hello" || "world");
+console.log("foo" && "bar");
+```
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+<p>
+
+1. `console.log("hello" || "world")` returns `"hello"`.
+
+   Explanation: The `||` (logical OR) operator returns the first truthy value it encounters. Since `"hello"` is a truthy value, it is returned.
+
+2. `console.log("foo" && "bar")` returns `"bar"`.
+
+   Explanation: The `&&` (logical AND) operator returns the first falsy value it encounters, or the last value if all are truthy. Both `"foo"` and `"bar"` are truthy, so the last value, `"bar"`, is returned.
+</p>
+</div>
+</details>
+
+### Immediately Invoked Function Expression (IIFE)
+
+**Task:** Write an immediately invoked function expression (IIFE)
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+<p>
+
+An immediately invoked function expression (IIFE) can be written as follows:
+
+```js
+(function() {
+    console.log('This is an IIFE');
+})();
+```
+
+This will log "This is an IIFE" immediately upon execution.
+</p>
+</div>
+</details>
+
+### Function Returns
+
+**Question:** Consider the two functions below. Will they both return the same thing? Why or why not?
+
+```js
+function foo1() {
+  return {
+      bar: "hello"
+  };
+}
+
+function foo2() {
+  return
+  {
+      bar: "hello"
+  };
+}
+```
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+<p>
+
+The two functions will not return the same thing.
+
+Explanation:
+
+In `foo1`, the object `{ bar: "hello" }` is returned correctly.
+
+```js
+function foo1() {
+  return {
+      bar: "hello"
+  };
+}
+```
+
+In `foo2`, due to the placement of the newline after `return`, JavaScript's automatic semicolon insertion inserts a semicolon immediately after `return`. This means `foo2` effectively returns `undefined`.
+
+```js
+function foo2() {
+  return;
+  {
+      bar: "hello"
+  };
+}
+```
+
+To correct `foo2` so it returns the same object as `foo1`, the opening curly brace should be on the same line as `return`.
+
+```js
+function foo2() {
+  return {
+      bar: "hello"
+  };
+}
+```
+</p>
+</div>
+</details>
