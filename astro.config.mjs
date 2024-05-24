@@ -94,10 +94,7 @@ export default defineConfig({
         },
         {
           label: "Accessibility",
-          items: [
-            // Each item here is one entry in the navigation menu.
-            { label: "Example Guide", link: "/guides/example/" },
-          ],
+          link: "https://scottaohara.github.io/accessibility_interview_questions/",
         },
         {
           label: "Testing",
@@ -119,6 +116,10 @@ export default defineConfig({
             // Each item here is one entry in the navigation menu.
             { label: "Example Guide", link: "/guides/example/" },
           ],
+        },
+        {
+          label: "Version Control",
+          link: "https://ohshitgit.com",
         },
       ],
     }),
