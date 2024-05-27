@@ -21,8 +21,11 @@ export default defineConfig({
           label: "Cool off",
           items: [
             // Each item here is one entry in the navigation menu.
-            { label: "Motivation", link: "/guides/cool/cooloff/" },
-            { label: "General", link: "/guides/general/general/" },
+            { label: "Measuring Motivation", link: "/guides/cool/cooloff/" },
+            {
+              label: "General Frontend wisdom ",
+              link: "/guides/general/general/",
+            },
           ],
         },
         {
@@ -36,30 +39,40 @@ export default defineConfig({
           label: "CSS",
           items: [
             // Each item here is one entry in the navigation menu.
-            { label: "  Essentials", link: "/guides/css/css/" },
+            { label: "Chapter One - The Essentials", link: "/guides/css/css/" },
+            {
+              label: "Chapter One - Getting hands dirty",
+              link: "/guides/css/two/",
+            },
           ],
         },
         {
-          label: "Important Concepts",
+          label: "Important* Concepts",
           link: "/guides/concepts/concepts/",
         },
         {
           label: "Javascript",
           items: [
             // Each item here is one entry in the navigation menu.
-            { label: "Chapter One", link: "/guides/js/one/" },
-            { label: "Chapter Two", link: "/guides/js/two/" },
-            { label: "Chapter Three", link: "/guides/js/three/" },
+            { label: "Chapter One - Practical JS", link: "/guides/js/one/" },
+            { label: "Chapter Two - Hoop One", link: "/guides/js/two/" },
+            { label: "Chapter Three - Hoop Two", link: "/guides/js/three/" },
           ],
         },
         {
           label: "Code snippets",
           items: [
             // Each item here is one entry in the navigation menu.
-            { label: "Chapter One", link: "/guides/snippets/one/" },
+            {
+              label: "Chapter One  - Brain Teasers",
+              link: "/guides/snippets/one/",
+            },
             { label: "Chapter Two", link: "/guides/snippets/two/" },
             { label: "Chapter Three", link: "/guides/snippets/three/" },
-            { label: "Chapter Four", link: "/guides/snippets/four/" },
+            {
+              label: "Chapter Four - Futile JS",
+              link: "/guides/snippets/four/",
+            },
           ],
         },
 
@@ -119,7 +132,7 @@ export default defineConfig({
         },
         {
           label: "Version Control",
-          link: "https://ohshitgit.com",
+          link: "https://wizardzines.com/git-cheat-sheet.pdf",
         },
       ],
     }),

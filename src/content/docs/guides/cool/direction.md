@@ -13,7 +13,7 @@ They need to be convinced about your skills inorder to hire you, they are lookin
 You get the position if you convince everyone in the team that you are the best they can get and for that, being humble about your abilities will hurt you. **You are expected to brag in an interview**
 
 
-### How tech interviews works
+### How tech interviews work
 
 
 Tech industry will pay you more than other works so there is more demand.
