@@ -27,3 +27,14 @@ description: A guide in my new Starlight docs site.
 - What are HTTP methods? List all HTTP methods that you know, and explain them.
 - What is domain pre-fetching and how does it help with performance?
 - What is a CDN and what is the benefit of using one?
+
+
+## Resources
+
+[Awsome web Dev Resources ](https://web-dev-resources.com/#/)
+
+[Patterns](https://www.patterns.dev/#patterns)
+
+[Frontend Interview Handbook](https://www.frontendinterviewhandbook.com/introduction/)
+
+[Commonly asked questions to evaluate React expertise](https://iq.js.org/react)
