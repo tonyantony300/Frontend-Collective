@@ -3,6 +3,47 @@ title: CSS Essentials
 description: A guide in my new Starlight docs site.
 ---
 
+
+### The first question is, what is the CSS box model? 
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+This is a foundational concept in CSS. Basically, anything on a page is a box, and there's a specific way of thinking about content on a web page. The four parts of the box model are the content itself, the padding around the content, the content's borders, and the content's margin. The content can have a height or width. If it doesn't, it defaults. Padding is the space between the content and its border, while margin is everything outside the border, setting the space between the border and the next element. 
+
+</div>
+</details>
+
+
+
+### what is the CSS position property and its values?
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+A positioned element is an element whose computed position property is either relative, absolute, fixed or sticky.
+
+`static` - The default position; the element will flow into the page as it normally would. The top, right, bottom, left and z-index properties do not apply.
+
+`relative` - The element's position is adjusted relative to itself, without changing layout (and thus leaving a gap for the element where it would have been had it not been positioned).
+
+`absolute` - The element is removed from the flow of the page and positioned at a specified position relative to its closest positioned ancestor if any, or otherwise relative to the initial containing block. Absolutely positioned boxes can have margins, and they do not collapse with any other margins. These elements do not affect the position of other elements.
+
+`fixed` - The element is removed from the flow of the page and positioned at a specified position relative to the viewport and doesn't move when scrolled.
+
+`sticky` - Sticky positioning is a hybrid of relative and fixed positioning. The element is treated as relative positioned until it crosses a specified threshold, at which point it is treated as fixed positioned.
+
+</div>
+</details>
+
+
+
+
+
+
+
 ### What is CSS selector specificity and how does it work?
 
 
@@ -27,6 +68,41 @@ I would write CSS rules with low specificity so that they can be easily overridd
 </details>
 
 
+### Understaning how block, inline, and inline-block each behave
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+Most things are blocks. 
+
+Block elements take up full width default.
+They stack one on top of each other.
+
+Inline elements are when you dont want them to stack on top of each other(Only take up the width of content). no effect if we add height or margin or padding to inline elemets.
+
+If we need an element inline & padding and height need to be added, you go with inline-block. ex: `<a class="btn"/>`
+
+</div>
+</details>
+
+
+### what are the differences between `display:none` and `visibility:hidden` 
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+
+`display:none` turns off the layout of the elements, so they are not rendered.
+
+`visibility:hidden` hides the elements without changing their layouts.
+
+`opacity:0` causes the elements to be very transparent but users can still interact with them.
+
+</div>
+</details>
+
 
 ### What's the difference between "resetting" and "normalizing" CSS? Which would you choose, and why?
 
@@ -44,8 +120,8 @@ I would choose resetting when I have a very customized or unconventional site de
 </div>
 </details>
 
-### Describe `floats` and how they work.
 
+### Describe `floats` and how they work.
 
 <details>
 <summary>Explanation</summary>
@@ -72,10 +148,13 @@ The `.clearfix` hack uses a clever CSS pseudo selector (`::after`) to clear floa
 Alternatively, give `overflow: auto` or `overflow: hidden` property to the parent element which will establish a new block formatting context inside the children and it will expand to contain its children.
 
 
+[Refer this for floats and clear](https://youtu.be/LrdkRMZhgZg?si=By2XITsqxKL-q7wm&t=551)
 
 
 </div>
 </details>
+
+
 
 ### Describe z- index and how stacking context is formed.
 
@@ -93,72 +172,12 @@ A stacking context is an element that contains a set of layers. Within a local s
 Each stacking context is self-contained - after the element's contents are stacked, the whole element is considered in the stacking order of the parent stacking context. A handful of CSS properties trigger a new stacking context, such as opacity less than 1, filter that is not none, and transform that is notnone.
 
 
-
+[Reference video](https://www.youtube.com/watch?v=xBPgSc_62rw)
 </div>
 </details>
 
-###  Describe Block Formatting Context (BFC) and how it works.
 
 
-<details>
-<summary>Explanation</summary>
-<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
-
-A Block Formatting Context (BFC) is part of the visual CSS rendering of a web page in which block boxes are laid out. Floats, absolutely positioned elements, inline-blocks, table-cells, table-captions, and elements with overflow other than visible (except when that value has been propagated to the viewport) establish new block formatting contexts.
-
-Knowing how to establish a block formatting context is important, because without doing so, the containing box will not contain floated children. This is similar to collapsing margins, but more insidious as you will find entire boxes collapsing in odd ways.
-
-A BFC is an HTML box that satisfies at least one of the following conditions:
-
-The value of float is not none.
-The value of position is neither static nor relative.
-The value of display is table-cell, table-caption, inline-block, flex, or inline-flex, grid, or inline-grid.
-The value of overflow is not visible.
-In a BFC, each box's left outer edge touches the left edge of the containing block (for right-to-left formatting, right edges touch).
-
-Vertical margins between adjacent block-level boxes in a BFC collapse. Read more on collapsing margins.
-
-
-</div>
-</details>
-
-###  What are the various clearing techniques and which is appropriate for what context?
-
-
-
-<details>
-<summary>Explanation</summary>
-<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
-
-- Empty div method - <div style="clear:both;"></div>.
-- Clearfix method - Refer to the .clearfix class above.
-- overflow: auto or overflow: hidden method - Parent will establish a new block formatting context and expand to contains its floated children.
-In large projects, I would write a utility .clearfix class and use them in places where I need it. overflow: hidden might clip children if the children is taller than the parent and is not very ideal.
-
-
-</div>
-</details>
-
-### Explain CSS sprites, and how you would implement them on a page or site.
-
-
-
-<details>
-<summary>Explanation</summary>
-<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
-
-CSS sprites combine multiple images into one single larger image. It is a commonly-used technique for icons (Gmail uses it). How to implement it:
-
-Use a sprite generator that packs multiple images into one and generate the appropriate CSS for it.
-Each image would have a corresponding CSS class with background-image, background-position and background-size properties defined.
-To use that image, add the corresponding class to your element.
-Advantages:
-
-Reduce the number of HTTP requests for multiple images (only one single request is required per spritesheet). But with HTTP2, loading multiple images is no longer much of an issue.
-Advance downloading of assets that won't be downloaded until needed, such as images that only appear upon :hover pseudo-states. Blinking wouldn't be seen.
-
-</div>
-</details>
 
 ###  How would you approach fixing browser- specific styling issues?
 
@@ -196,46 +215,108 @@ Advance downloading of assets that won't be downloaded until needed, such as ima
 
 
 
-- What are the different ways to visually hide content (and make it available only for screen readers)?
 
-- Have you ever used a grid system, and if so, what do you prefer?
+###  Explain distinct phases in the rendering pipeline of a web page by a browser.
 
-- Have you used or implemented media queries or mobile- specific layouts/CSS?
 
-- Are you familiar with styling SVG?
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
 
-- Can you give an example of an @media property other than screen?
+Layout (Reflow): Calculation of element positions and sizes.
+Paint: Filling in pixels based on layout and styles.
+Composite: Combining layers to produce the final screen output.
 
-- What are some of the "gotchas" for writing efficient CSS?
 
-- What are the advantages/disadvantages of using CSS preprocessors?
+</div>
+</details>
 
-- Describe what you like and dislike about the CSS preprocessors you have used.
 
-- How would you implement a web design comp that uses non- standard fonts?
 
-- Explain how a browser determines what elements match a CSS selector.
+###  What's the difference between layout painting and compositing?
 
-- Describe pseudo- elements and discuss what they are used for.
 
-- Explain your understanding of the box model and how you would tell the browser in CSS to render your layout in different box models.
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
 
-- What does * { box- sizing: border- box; } do? What are its advantages?
+- Layout: Calculates the size and position of each DOM element to be displayed on the screen. The layout of elements on a Web page is relative, which means a single element can affect others. For example, in case there is a change in the width of the element, the widths of its child and grandchild elements get affected. Therefore, the layout process often gets involved for the browser.
 
-- What is the CSS display property and can you give a few examples of its use?
+- Paint: Essentially, painting is the process of filling in pixels. It requires painting of text, colors, images, borders, shadows, and other visual effects of a DOM element.
 
-- What's the difference between inline and inline- block?
+- Composite: Once Paint is complete, the browser combines all the layers into one layer in the correct order and displays them on the screen. This process is especially important for pages with overlapping elements as the incorrect layer composition order may result in an abnormal display of the elements.
 
-- What's the difference between a relative, fixed, absolute and statically positioned element?
+</div>
+</details>
 
-- What existing CSS frameworks have you used locally, or in production? How would you change/improve them?
 
-- Have you played around with the new CSS Flexbox or Grid specs?
 
-- Can you explain the difference between coding a website to be responsive versus using a mobile- first strategy?
 
-- How is responsive design different from adaptive design?
+###  What are some of the "gotchas" for writing efficient CSS?
 
-- Have you ever worked with retina graphics? If so, when and what techniques did you use?
 
-- Is there any reason you'd want to use translate() instead of absolute positioning, or vice-versa? And why?
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+Firstly, understand that browsers match selectors from rightmost (key selector) to left. Browsers filter out elements in the DOM according to the key selector and traverse up its parent elements to determine matches. The shorter the length of the selector chain, the faster the browser can determine if that element matches the selector. Hence avoid key selectors that are tag and universal selectors. They match a large number of elements and browsers will have to do more work in determining if the parents do match.
+
+
+Be aware of which CSS properties trigger reflow, repaint, and compositing. Avoid writing styles that change the layout (trigger reflow) where possible.
+
+
+
+</div>
+</details>
+
+
+
+###  Explain distinct phases in the rendering pipeline of a web page by a browser.
+
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+Layout (Reflow): Calculation of element positions and sizes.
+Paint: Filling in pixels based on layout and styles.
+Composite: Combining layers to produce the final screen output.
+
+
+</div>
+</details>
+
+
+
+### `notes` : CSS layouts 
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+Unlike other languages, Layout works in relation with other elements.
+Parent-children relationship - childern width adjusts with parent width, keeping childern area same, ie, height may increase.
+
+Childern inherits styles on the parent.
+
+Collapsing margins are a thing(Child’s margin impacting the parent (if flex or grid, its different))
+
+
+</div>
+</details>
+
+
+### Is there any reason you'd want to use translate() instead of absolute positioning, or vice-versa? And why?
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+translate() is a value of CSS transform. Changing transform or opacity does not trigger browser reflow or repaint but does trigger compositions; whereas changing the absolute positioning triggers reflow. transform causes the browser to create a GPU layer for the element but changing absolute positioning properties uses the CPU. Hence translate() is more efficient and will result in shorter paint times for smoother animations.
+
+When using translate(), the element still occupies its original space (sort of like position: relative), unlike in changing the absolute positioning.
+
+
+</div>
+</details>
+
