@@ -771,7 +771,7 @@ Let's continue with following the execution path:
 
 
 
-### prediction 
+### prediction 9
 
 Do you know what will be the output of this code?
 
@@ -807,7 +807,7 @@ And this is why, when accessing array[5] undefined is returned.
 </details>
 
 
-### prediction 
+### prediction 10
 
 Do you know what will be the output of this code?
 
@@ -835,3 +835,91 @@ const str = String.raw`${varOne}\t\n${varTwo}` // => "Hey\t\nthere"
 
 </div>
 </details>
+
+
+### prediction 11
+
+What will be output of that code?
+```js
+const firstname = fun();
+let name = ‘vivek’
+function fun(){
+Return `my is ${name} malviya`
+}
+console.log(firstname);
+```
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+The output will be a `ReferenceError` because the function `fun` tries to access the variable `name` before it's declared. In JavaScript, variable declarations using `let` and `const` are not hoisted to the top of their enclosing block. Therefore, when `fun` is called, `name` is still in the temporal dead zone.
+
+```js
+var firstname = fun();
+var name = ‘vivek’
+function fun(){
+return `my is ${name} malviya`
+}
+console.log(firstname); // => my is undefined malviya
+```
+
+
+1. **Function Hoisting**:
+   - Function declarations are fully hoisted. This means the entire function is moved to the top of its scope, allowing the function to be called before its declaration in the code.
+   
+   ```js
+   function fun() {
+       return `my is ${name} malviya`;
+   }
+   ```
+
+2. **Variable Hoisting**:
+   - Variables declared with `let` and `const` are hoisted to the top of their block, but not initialized. This means they exist in a "temporal dead zone" from the start of the block until the declaration is encountered. Accessing them in this zone results in a `ReferenceError`.
+
+   ```js
+   let name = 'vivek';
+   ```
+
+
+</div>
+</details>
+
+### prediction 12
+
+What will be the output of this program?
+
+Input:
+```js
+for (let i = 0; i < 5; i++) {
+    setTimeout(function () {
+        console.log(i);
+    }, i * 1000);
+}
+
+for (var i = 0; i < 5; i++) {
+    setTimeout(function () {
+        console.log(i);
+    }, i * 1000);
+}
+```
+
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+Output:
+```js
+// 👉 0 1 2 3 4
+// 👉 5 5 5 5 5
+```
+For the first loop using `let`, the output will be `0 1 2 3 4`, as `let` creates a new scope for each iteration. For the second loop using `var`, the output will be `5 5 5 5 5`, as `var` does not create a new scope for each iteration and the value of `i` is shared.
+
+</div>
+</details>
+
+
+
+
+

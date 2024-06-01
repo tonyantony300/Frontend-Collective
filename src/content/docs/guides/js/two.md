@@ -156,6 +156,91 @@ As you can see, the function `greet` can have properties (like `description`), a
 </details>
 
 
+
+### Difference bw let, const and var 
+
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+Comparing Block Scope and Function Scope: Inside a function but outside blocks:
+
+```js
+function example() {
+    if (true) {
+        var functionScoped = "I'm function scoped";
+        let blockScoped = "I'm block scoped";
+    }
+    console.log(functionScoped); // Output: "I'm function scoped"
+    console.log(blockScoped); // ReferenceError: blockScoped is not defined
+}
+example();
+
+```
+Outside of functions:
+
+```js
+{
+    var globalVar = "I'm globally scoped";
+    let blockVar = "I'm block scoped";
+}
+console.log(globalVar); // Output: "I'm globally scoped"
+console.log(blockVar); // ReferenceError: blockVar is not defined
+```
+
+
+#### Summary of Differences
+
+1. **Hoisting Behavior**:
+   - `var`: Declaration is hoisted to the top of the function or global scope and initialized to `undefined`.
+   - `let` and `const`: Declarations are hoisted to the top of the block scope, but not initialized, leading to the Temporal Dead Zone.
+
+2. **Temporal Dead Zone (TDZ)**:
+   - `var`: No Temporal Dead Zone; variables are accessible and initialized to `undefined`.
+   - `let` and `const`: Have a Temporal Dead Zone; accessing the variable before its declaration results in a `ReferenceError`.
+
+3. **Initialization Requirement**:
+   - `var`: Initialization can happen later in the code.
+   - `let`: Initialization can happen later, but accessing it before initialization within the block causes an error.
+   - `const`: Must be initialized at the point of declaration.
+
+#### Examples Illustrating Hoisting
+
+1. **Function Scope and `var` Hoisting**:
+
+    ```js
+    function exampleFunction() {
+        console.log(hoistedVar); // Output: undefined
+        var hoistedVar = "I'm hoisted";
+        console.log(hoistedVar); // Output: "I'm hoisted"
+    }
+    exampleFunction();
+    ```
+
+2. **Block Scope and `let`/`const` Hoisting**:
+
+    ```js
+    {
+        console.log(blockScopedLet); // ReferenceError: blockScopedLet is not defined
+        let blockScopedLet = "I'm block scoped with let";
+        console.log(blockScopedLet); // Output: "I'm block scoped with let"
+    }
+
+    {
+        console.log(blockScopedConst); // ReferenceError: blockScopedConst is not defined
+        const blockScopedConst = "I'm block scoped with const";
+        console.log(blockScopedConst); // Output: "I'm block scoped with const"
+    }
+    ```
+
+
+
+</div>
+</details>
+
+
+
 ### Can you give an example of one of the ways that working with this has changed in ES6?
 
 

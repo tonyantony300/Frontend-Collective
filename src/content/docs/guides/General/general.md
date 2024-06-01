@@ -42,6 +42,25 @@ description: These will provide an outline of frontend Knowledge base.
 </div>
 </details>
 
+
+### Explain SSR VS CSR
+
+
+<details>
+<summary>Answer</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+[Initial Reference](https://dev.to/pahanperera/visual-explanation-and-comparison-of-csr-ssr-ssg-and-isr-34ea)
+
+CSR - Client Side Rendering
+SSR - Server Side Rendering - SEO optimised
+SSG - Static Site Generation
+ISR - Incremental Static Regeneration
+
+
+</div>
+</details>
+
 ### Front-End Security Techniques
 
 **Can you explain any common techniques or recent issues solved in regards to front-end security?**
