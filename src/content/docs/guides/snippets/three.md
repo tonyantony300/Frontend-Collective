@@ -77,6 +77,14 @@ arr.filter((dup) => {
 console.log("removed array value", b); // 👉 [1, 2, 3, 4]
 ```
 
+or just do
+
+```js
+console.log([...new Set(arr)]) // 👉 [1, 2, 3, 4]
+```
+
+
+
 The code iterates through the array and pushes each element into the new array `b` only if it is not already present in `b`. This removes duplicate elements and results in `[1, 2, 3, 4]`.
 
 </div>
@@ -104,6 +112,16 @@ Output:
 <div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
 
 ```js
+const call = (a) => {
+    return (b) => {
+        return (c) => {
+            return a * b * c
+        }
+    }
+} 
+
+//Above can also be written as a one liner
+
 const call = (a) => (b) => (c) => a * b * c;
 
 console.log("output with arrow function", call(2)(4)(6)); // 👉 48
@@ -116,7 +134,7 @@ The arrow function syntax achieves the same result as the normal function, where
 
 ---
 
-### Write a program to return resolve if value is less than 5 using Promise
+### Write a program to return resolve if value is less than 7 using Promise
 
 
 
@@ -152,8 +170,23 @@ function fun(a) {
 
 fun(5); // 👉 "number is given 5"
 ```
+OR this way also possible
 
-The code creates a promise that resolves if the given number is less than 7. It prints "number is given 5" if the number is 5, as the condition is satisfied.
+```js
+
+const fun = (value) => {
+    return new Promise((resolve, reject) => {
+        if(value < 5 ){
+           resolve('Number less than 5') 
+        } else {
+            reject('Error')
+        }
+    })
+}
+    fun(3).then((success) => console.log(success)).catch((second) => console.log(second))
+    
+```
+
 
 </div>
 </details>
@@ -225,6 +258,16 @@ for (let i = 0; i < arr.length; i++) {
 }
 
 console.log("Elements of array sorted in ascending order:", arr);  // 👉 [0, 1, 2, 3, 4, 5]
+
+```
+
+or
+
+```js
+const arr = [3, 2, 5, 4, 1, 0];
+const result = arr.sort((a,b) => a - b)
+console.log(result)
+
 ```
 </div>
 </details>
