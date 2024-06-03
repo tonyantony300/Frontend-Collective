@@ -1,5 +1,5 @@
 ---
-title: Javascript Chapter 3
+title: Chapter 3
 description: This should be comprehensive
 ---
 

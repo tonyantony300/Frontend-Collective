@@ -55,8 +55,8 @@ export default defineConfig({
           items: [
             // Each item here is one entry in the navigation menu.
             { label: "Chapter One - Practical JS", link: "/guides/js/one/" },
-            { label: "Chapter Two - Hoop One", link: "/guides/js/two/" },
-            { label: "Chapter Three - Hoop Two", link: "/guides/js/three/" },
+            { label: "Chapter Two - Theory One", link: "/guides/js/two/" },
+            { label: "Chapter Three - Theory Two", link: "/guides/js/three/" },
           ],
         },
         {
@@ -70,7 +70,7 @@ export default defineConfig({
             { label: "Chapter Two", link: "/guides/snippets/two/" },
             { label: "Chapter Three", link: "/guides/snippets/three/" },
             {
-              label: "Chapter Four - Futile JS",
+              label: "Chapter Four",
               link: "/guides/snippets/four/",
             },
           ],

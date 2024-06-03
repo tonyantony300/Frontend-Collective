@@ -1,7 +1,137 @@
 ---
-title: Javascript Chapter 2
+title: Chapter 2
 description: This should be comprehensive
 ---
+
+
+
+
+### Promise, Callback Function, Async/Await in JavaScript
+
+**Promise:**
+A promise in JavaScript represents the eventual completion (or failure) of an asynchronous operation and its resulting value. It is a cleaner and more manageable way to handle asynchronous operations compared to traditional callback functions.
+
+A promise can be in one of three states:
+- Pending: Initial state, neither fulfilled nor rejected.
+- Fulfilled: The operation completed successfully.
+- Rejected: The operation failed.
+
+Promises provide `.then()`, `.catch()`, and `.finally()` methods to handle these states.
+
+**Callback Function:**
+A callback function is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action. Callbacks are commonly used to continue execution after an asynchronous operation has completed.
+
+**Async/Await:**
+Async/Await is a syntactic sugar built on top of Promises, allowing asynchronous code to be written in a more synchronous fashion. The `async` keyword is used to declare an asynchronous function, and the `await` keyword is used to pause execution until a promise is resolved or rejected.
+
+
+
+
+<details>
+<summary>Example usage:</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+
+
+```javascript
+// Promise example
+let promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("Success!");
+  }, 1000);
+});
+
+promise.then(value => {
+  console.log(value); // "Success!"
+}).catch(error => {
+  console.error(error);
+});
+
+// Callback example
+function doSomething(callback) {
+  setTimeout(() => {
+    callback("Done!");
+  }, 1000);
+}
+
+doSomething(result => {
+  console.log(result); // "Done!"
+});
+
+// Async/Await example
+async function asyncFunction() {
+  try {
+    let result = await promise;
+    console.log(result); // "Success!"
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+asyncFunction();
+```
+
+</div>
+</details>
+
+### Difference Between Promise and Callback in JavaScript
+
+**Promises vs Callbacks:**
+
+1. **Readability and Maintainability:**
+   - **Callbacks:** Can lead to "callback hell" where callbacks are nested within other callbacks, making the code harder to read and maintain.
+   - **Promises:** Provide a cleaner, more readable way to chain asynchronous operations using `.then()`, `.catch()`, and `.finally()` methods.
+
+2. **Error Handling:**
+   - **Callbacks:** Error handling can be more complex and inconsistent since errors need to be handled in each callback separately.
+   - **Promises:** Have a more structured approach to error handling using `.catch()` to handle errors in the entire chain.
+
+3. **Chaining:**
+   - **Callbacks:** Chaining multiple asynchronous operations can be cumbersome and lead to deeply nested code.
+   - **Promises:** Allow easy chaining of multiple asynchronous operations, making the code flatter and more readable.
+
+4. **Return Values:**
+   - **Callbacks:** Cannot directly return values from asynchronous operations; instead, you pass the result to the next callback.
+   - **Promises:** Can return a promise from one `.then()` method to another, allowing values to be passed through the chain.
+
+
+<details>
+<summary>Example comparison:</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+
+
+
+**Callback Hell:**
+```javascript
+doSomething((result1) => {
+  doSomethingElse(result1, (result2) => {
+    doMore(result2, (result3) => {
+      console.log(result3);
+    });
+  });
+});
+```
+
+**Promise Chain:**
+```javascript
+doSomething()
+  .then(result1 => doSomethingElse(result1))
+  .then(result2 => doMore(result2))
+  .then(result3 => {
+    console.log(result3);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+```
+
+In summary, promises and async/await offer more readable and maintainable ways to handle asynchronous operations compared to callbacks, with better error handling and chaining capabilities.
+
+</div>
+</details>
+
+
 
 ### Event delegation
 
@@ -21,6 +151,304 @@ There is no need to unbind the handler from elements that are removed and to bin
 
 </div>
 </details>
+
+
+### Hoisting in JavaScript
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+Hoisting is a JavaScript mechanism where variable and function declarations are moved to the top of their containing scope during the compile phase. This means you can use variables and functions before they are declared in the code.
+
+**Variable Hoisting:**
+- Variables declared with `var` are hoisted and initialized with `undefined`.
+- Variables declared with `let` and `const` are hoisted but are not initialized, leading to a "temporal dead zone" until the declaration is encountered.
+
+**Function Hoisting:**
+- Function declarations are hoisted and can be used before they are defined.
+- Function expressions are not hoisted.
+
+Example:
+```javascript
+console.log(hoistedVar); // undefined
+var hoistedVar = 'This is hoisted';
+
+console.log(hoistedLet); // ReferenceError: hoistedLet is not defined
+let hoistedLet = 'This is not hoisted';
+
+hoistedFunction(); // This function is hoisted
+function hoistedFunction() {
+  console.log('This function is hoisted');
+}
+
+hoistedFunctionExpr(); // TypeError: hoistedFunctionExpr is not a function
+var hoistedFunctionExpr = function() {
+  console.log('This function is not hoisted');
+};
+```
+
+</div>
+</details>
+
+### Temporal Dead Zone in JavaScript
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+The Temporal Dead Zone (TDZ) is the period between entering a block scope and the point where a variable declared with `let` or `const` is initialized. During this time, accessing the variable results in a `ReferenceError`.
+
+Example:
+```javascript
+console.log(x); // ReferenceError: Cannot access 'x' before initialization
+let x = 10;
+```
+
+In the example above, accessing `x` before its declaration results in a `ReferenceError` due to the TDZ.
+
+</div>
+</details>
+
+### MutationObserver in JavaScript
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+`MutationObserver` is a built-in object that allows you to observe changes to the DOM tree. You can use it to watch for changes to the child elements, attributes, and text content of a specified node.
+
+Example:
+```javascript
+const targetNode = document.getElementById('myElement');
+const config = { attributes: true, childList: true, subtree: true };
+
+const callback = function(mutationsList, observer) {
+  for(let mutation of mutationsList) {
+    if (mutation.type === 'childList') {
+      console.log('A child node has been added or removed.');
+    }
+    else if (mutation.type === 'attributes') {
+      console.log('The ' + mutation.attributeName + ' attribute was modified.');
+    }
+  }
+};
+
+const observer = new MutationObserver(callback);
+observer.observe(targetNode, config);
+
+// To stop observing
+// observer.disconnect();
+```
+
+In the example above, `MutationObserver` watches for changes to the specified element's children and attributes.
+
+</div>
+</details>
+
+### Memoization in JavaScript
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+Memoization is an optimization technique to speed up function calls by caching the results of expensive function calls and returning the cached result when the same inputs occur again.
+
+Example:
+```javascript
+function memoize(fn) {
+  const cache = {};
+  return function(...args) {
+    const key = JSON.stringify(args);
+    if (cache[key]) {
+      return cache[key];
+    } else {
+      const result = fn(...args);
+      cache[key] = result;
+      return result;
+    }
+  };
+}
+
+const slowFunction = (num) => {
+  // Some expensive computation
+  return num * 2;
+};
+
+const memoizedFunction = memoize(slowFunction);
+
+console.log(memoizedFunction(5)); // Slow computation
+console.log(memoizedFunction(5)); // Fast return from cache
+```
+
+In the example above, `memoize` function caches the results of `slowFunction` to avoid recomputing for the same inputs.
+
+</div>
+</details>
+
+### Difference Between Map and Set in JavaScript
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+**Map:**
+- A `Map` is a collection of key-value pairs where keys can be of any type.
+- It maintains the insertion order of the keys.
+- Methods: `set`, `get`, `has`, `delete`, `clear`, `size`.
+
+Example:
+```javascript
+let map = new Map();
+map.set('key1', 'value1');
+map.set('key2', 'value2');
+console.log(map.get('key1')); // "value1"
+console.log(map.has('key2')); // true
+```
+
+**Set:**
+- A `Set` is a collection of unique values (no duplicates).
+- It also maintains the insertion order of the values.
+- Methods: `add`, `has`, `delete`, `clear`, `size`.
+
+Example:
+```javascript
+let set = new Set();
+set.add(1);
+set.add(2);
+set.add(1); // Duplicate, will be ignored
+console.log(set.has(1)); // true
+console.log(set.size); // 2
+```
+
+</div>
+</details>
+
+### WeakMap and WeakSet in JavaScript
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+**WeakMap:**
+- A `WeakMap` is a collection of key-value pairs where the keys must be objects and the values can be of any type.
+- The keys in a `WeakMap` are held weakly, meaning they do not prevent garbage collection if there are no other references to the object.
+- Methods: `set`, `get`, `has`, `delete`.
+
+Example:
+```javascript
+let weakMap = new WeakMap();
+let obj = {};
+weakMap.set(obj, 'value');
+console.log(weakMap.get(obj)); // "value"
+obj = null; // The object is now eligible for garbage collection
+```
+
+**WeakSet:**
+- A `WeakSet` is a collection of unique objects (no duplicates).
+- The objects in a `WeakSet` are held weakly, meaning they do not prevent garbage collection if there are no other references to the object.
+- Methods: `add`, `has`, `delete`.
+
+Example:
+```javascript
+let weakSet = new WeakSet();
+let obj = {};
+weakSet.add(obj);
+console.log(weakSet.has(obj)); // true
+obj = null; // The object is now eligible for garbage collection
+```
+
+</div>
+</details>
+
+### sessionStorage, localStorage, and Cookie in JavaScript
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+**sessionStorage:**
+- Stores data for a single session (data is lost when the browser tab is closed).
+- Storage limit is about 5-10 MB.
+
+Example:
+```javascript
+sessionStorage.setItem('key', 'value');
+console.log(sessionStorage.getItem('key')); // "value"
+sessionStorage.removeItem('key');
+sessionStorage.clear();
+```
+
+**localStorage:**
+- Stores data with no expiration time (data persists even when the browser is closed).
+- Storage limit is about 5-10 MB.
+
+Example:
+```javascript
+localStorage.setItem('key', 'value');
+console.log(localStorage.getItem('key')); // "value"
+localStorage.removeItem('key');
+localStorage.clear();
+```
+
+**Cookie:**
+- Stores data that can be sent to the server with HTTP requests (can have an expiration date).
+- Storage limit is about 4 KB.
+
+Example:
+```javascript
+document.cookie = "username=John Doe; expires=Fri, 31 Dec 2024 23:59:59 GMT; path=/";
+console.log(document.cookie); // "username=John Doe"
+```
+
+</div>
+</details>
+
+### Truthy and Falsy Values in JavaScript
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+**Truthy Values:**
+In JavaScript, a truthy value is a value that is considered true when evaluated in a Boolean context. All values are truthy unless they are defined as falsy.
+
+Examples of truthy values:
+```javascript
+if (true) // true
+if ({}) // true
+if ([]) // true
+if (42) // true
+if ("0") // true
+if ("false") // true
+if (new Date()) // true
+if (-42) // true
+if (12n) // true
+if (3.14) // true
+if (-3.14) // true
+if (Infinity) // true
+if (-Infinity) // true
+```
+
+**Falsy Values:**
+A falsy value is a value that is considered false when evaluated in a Boolean context.
+
+Examples of falsy values:
+```javascript
+if (false) // false
+if (0) // false
+if (-0) // false
+if (0n) // false
+if ("") // false
+if (null) // false
+if (undefined) // false
+if (NaN) // false
+```
+
+</div>
+</details>
+
+
 
 
 ### this

@@ -923,3 +923,106 @@ For the first loop using `let`, the output will be `0 1 2 3 4`, as `let` creates
 
 
 
+### prediction 13
+
+What will be the output of this program?
+
+Input:
+```js
+var num = 4;
+function outer() {
+ var num = 2;
+ function inner() {
+   num++;
+   var num = 3;
+   console.log("num", num);
+}
+inner(); }
+outer();
+function sayHi() {
+ return (() => 0)();
+}
+```
+
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+Output:
+```js
+// 👉 num 3
+
+```
+
+### Code Analysis
+
+1. **Global Scope**:
+   - `var num = 4;` declares and initializes a global variable `num` with the value `4`.
+
+2. **`outer` Function**:
+   - Inside `outer`, a new local variable `num` is declared and initialized with the value `2`.
+   - The `inner` function is defined within `outer`. It has its own scope.
+
+3. **`inner` Function**:
+   - When `inner` is called, the first statement is `num++`.
+     - However, due to JavaScript's variable hoisting, the local variable `num` within `inner` is hoisted to the top of the function scope but remains uninitialized (i.e., `undefined`) until the point of its initialization (`var num = 3`).
+     - Thus, the `num++` operation increments the `undefined` value, which results in `NaN` (Not a Number).
+   - Next, `var num = 3;` initializes the local variable `num` within `inner` to `3`.
+   - `console.log("num", num);` logs the value of this local `num`, which is `3`.
+
+4. **Execution**:
+   - `outer();` is called, which in turn calls `inner();`.
+   - The `inner` function logs the value of its local `num` after it has been incremented and initialized to `3`.
+
+### Additional Function: `sayHi`
+   - This function `sayHi` is not called anywhere in the program, so its definition doesn't affect the output.
+
+### Output:
+   - The output of the program comes from the `console.log("num", num);` statement inside the `inner` function.
+   - Despite the `num++` operation, due to hoisting and scoping rules in JavaScript, the output will be `3`.
+
+
+
+</div>
+</details>
+
+
+
+
+
+
+### prediction 14
+
+What will be the output of this program?
+
+Input:
+```js
+const a = {};
+const b = { key: 'b' }; 
+const c = { key: 'c' }; 
+a[b] = 123;
+a[c] = 456;
+console.log(a[c]);
+```
+
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+Output:
+```js
+// 👉 456
+```
+Object keys are automatically converted into strings.
+We are trying to set an ***object as a key*** to object a, with the value of 123.
+However, when we stringify an object, it becomes "[object Object]".
+So what we are saying here, is that a["[object Object]"] = 123. Then,
+we can try to do the same again.
+c is another object that we are implicitly stringifying.
+So then, a["[object Object]"] = 456. Then, we log a[b],
+which is actually a["[object Object]"].
+We just set that to 456, so it returns 456. 
+</div>
+</details>
