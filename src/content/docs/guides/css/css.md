@@ -4,6 +4,56 @@ description: A guide in my new Starlight docs site.
 ---
 
 
+
+### Different units em, rem, %, px, vh, vw, ch explained
+
+<details>
+<summary>Explanation</summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+Sure! Here's an overview of the differences between the various CSS units: `em`, `rem`, `%`, `px`, `vh`, `vw`, and `ch`.
+
+1. **px (Pixels)**:
+   - **Description**: Pixels are the most straightforward unit of measurement in CSS. They represent a fixed size.
+   - **Use Case**: Ideal for precise control over element dimensions, such as borders, padding, and margins.
+   - **Example**: `width: 200px;`
+
+2. **% (Percentage)**:
+   - **Description**: Percentages are relative units. They are relative to the parent element's size.
+   - **Use Case**: Useful for responsive design where elements need to scale relative to their container.
+   - **Example**: `width: 50%;` (This means the element will take up 50% of the parent element's width.)
+
+3. **em**:
+   - **Description**: `em` units are relative to the font-size of the element they are used on. If used for font-size itself, it is relative to the font-size of the parent element.
+   - **Use Case**: Often used for font sizes and spacing because it allows elements to scale proportionately.
+   - **Example**: `font-size: 2em;` (This means the font size will be twice as large as the current font size of the parent.)
+
+4. **rem (Root em)**:
+   - **Description**: `rem` units are relative to the font-size of the root element (`<html>`).
+   - **Use Case**: Preferred for global scaling, ensuring consistent sizing across an entire document.
+   - **Example**: `font-size: 1.5rem;` (This means the font size will be 1.5 times the root element's font size.)
+
+5. **vh (Viewport Height)**:
+   - **Description**: `vh` units are relative to 1% of the viewport's height.
+   - **Use Case**: Useful for making elements responsive to the height of the viewport.
+   - **Example**: `height: 50vh;` (This means the element will be 50% of the viewport's height.)
+
+6. **vw (Viewport Width)**:
+   - **Description**: `vw` units are relative to 1% of the viewport's width.
+   - **Use Case**: Useful for making elements responsive to the width of the viewport.
+   - **Example**: `width: 50vw;` (This means the element will be 50% of the viewport's width.)
+
+7. **ch**:
+   - **Description**: `ch` units are relative to the width of the "0" (zero) character in the element's font.
+   - **Use Case**: Useful for setting widths that are related to character lengths, such as input fields.
+   - **Example**: `width: 20ch;` (This means the element's width will be the same as the width of 20 "0" characters in the element's font.)
+
+
+</div>
+</details>
+
+
+
 ### The first question is, what is the CSS box model? 
 
 <details>
