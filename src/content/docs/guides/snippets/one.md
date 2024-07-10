@@ -441,6 +441,170 @@ function foo2() {
 
 [Refer to learn about quality comparators, strict and abstract equality ](https://javascript.plainenglish.io/how-does-abstract-equality-comparison-work-591eed983666)
 
+
+### prediction 0
+
+what will be the output of this code?
+
+```js
+console.log('Start');
+
+setTimeout(() => {
+  console.log('setTimeout');
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('Promise');
+});
+
+console.log('End');
+
+```
+
+```js
+
+Promise.resolve().then(() => console.log(1));
+
+setTimeout(() => console.log(2), 10);
+
+queueMicrotask(() => {
+  console.log(3);
+  queueMicrotask(() => console.log(4));
+});
+
+console.log(5);
+
+```
+
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+Understanding the execution order of tasks and microtasks in JavaScript is crucial for handling asynchronous operations. Here's an explanation with examples.
+
+ Event Loop, Task Queue, and Microtask Queue
+
+In JavaScript, the event loop is responsible for handling asynchronous operations. It manages two main queues: the **Task Queue** (or **Macro Task Queue**) and the **Microtask Queue**.
+
+1. **Task Queue (Macro Task Queue):** This queue handles tasks such as `setTimeout`, `setInterval`, and other asynchronous tasks. These are processed after the current execution stack is empty.
+2. **Microtask Queue:** This queue handles tasks such as `Promise` callbacks and `queueMicrotask`. These are processed immediately after the current execution stack is empty but before any tasks from the Task Queue.
+
+ Example 1
+
+```javascript
+console.log('Start');
+
+setTimeout(() => {
+  console.log('setTimeout');
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('Promise');
+});
+
+console.log('End');
+```
+
+**Execution Explanation:**
+
+1. **Synchronous Code:** 
+   - `console.log('Start');` is executed immediately.
+   - `setTimeout(() => { console.log('setTimeout'); }, 0);` is scheduled in the Task Queue.
+   - `Promise.resolve().then(() => { console.log('Promise'); });` is scheduled in the Microtask Queue.
+   - `console.log('End');` is executed immediately.
+
+2. **Microtasks Execution:** 
+   - Microtasks in the Microtask Queue are processed next. So, `console.log('Promise');` is executed.
+
+3. **Tasks Execution:**
+   - Finally, tasks in the Task Queue are processed. So, `console.log('setTimeout');` is executed.
+
+**Output Order:**
+```
+Start
+End
+Promise
+setTimeout
+```
+
+
+```javascript
+Promise.resolve().then(() => console.log(1));
+
+setTimeout(() => console.log(2), 10);
+
+queueMicrotask(() => {
+  console.log(3);
+  queueMicrotask(() => console.log(4));
+});
+
+console.log(5);
+```
+
+**Execution Explanation:**
+
+1. **Synchronous Code:**
+   - `Promise.resolve().then(() => console.log(1));` is scheduled in the Microtask Queue.
+   - `setTimeout(() => console.log(2), 10);` is scheduled in the Task Queue.
+   - `queueMicrotask(() => { console.log(3); queueMicrotask(() => console.log(4)); });` is scheduled in the Microtask Queue.
+   - `console.log(5);` is executed immediately.
+
+2. **Microtasks Execution:**
+   - Microtasks in the Microtask Queue are processed next.
+     - First, `console.log(1);` is executed.
+     - Next, `console.log(3);` is executed and a new microtask `queueMicrotask(() => console.log(4));` is added to the Microtask Queue.
+     - Then, `console.log(4);` is executed.
+
+3. **Tasks Execution:**
+   - Finally, tasks in the Task Queue are processed after the specified delay. So, `console.log(2);` is executed after approximately 10ms.
+
+**Output Order:**
+```
+5
+1
+3
+4
+2
+```
+
+
+- Synchronous code is executed first.
+- Microtasks (e.g., `Promise` callbacks, `queueMicrotask`) are executed after the current execution stack is empty but before any tasks from the Task Queue.
+- Tasks (e.g., `setTimeout`, `setInterval`) are executed after all microtasks are processed and the current execution stack is empty.
+
+Understanding this order is essential for debugging asynchronous JavaScript code and ensuring predictable behavior in your applications.
+
+</div>
+</details>
+
+
+### prediction 0.5
+
+What will get logged?
+
+
+```js
+new Promise ((resolve) => {
+    console.log(1)
+    resolve(2)
+}).then(result => console.log(result))
+console.log(3)
+```
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+```
+1
+3
+2
+```
+Explanation - .then part is put in micro tasks queue, not immediatley executed.
+
+</div>
+</details>
+
 ### prediction 1
 
 Do you know what will be the output of this code?

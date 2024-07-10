@@ -295,41 +295,23 @@ getData();
 
 ```js
 // This function fetches data from a given URL and returns a promise.
-async function fetchData(url) {
-  try {
-    // Fetch data from the URL
-    const response = await fetch(url);
-
-    // Check if the response is okay (status code 200-299)
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+async function fetchData(url){
+    
+    try {
+    const response = await fetch(url)
+    if(!response.ok){
+        throw new Error(`HTTP Error status ${response.status}`)
     }
-
-    // Parse the JSON data from the response
-    const data = await response.json();
-
-    // Return the parsed data
-    return data;
-  } catch (error) {
-    // If there's an error, log it
-    console.error('There was a problem with the fetch operation:', error);
-  }
+    const data = await response.json()
+    return data
+    } catch {
+        console.log('there is some problem with fetch operation');
+    }
 }
 
-// Example usage:
-const url = 'https://api.example.com/data';
 
-fetchData(url)
-  .then(data => {
-    // Do something with the data
-    console.log(data);
-  })
-  .catch(error => {
-    // Handle any errors that were not caught in fetchData
-    console.error('Error fetching data:', error);
-  });
-
-```
+const url = "https://dummyjson.com/test"
+fetchData(url).then(resp => console.log(resp)).catch(err => console.log(`Error fetching data ${err}`))
 
 
 </div>
