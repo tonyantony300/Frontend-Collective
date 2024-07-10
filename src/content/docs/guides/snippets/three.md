@@ -194,6 +194,208 @@ const fun = (value) => {
 ---
 
 
+### Explain `await` key word in Javascript
+
+
+
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+The `await` keyword in JavaScript is used to pause the execution of an asynchronous function until a Promise is resolved or rejected. It can only be used inside an `async` function.
+
+##### Key Points:
+1. **Asynchronous Functions**: 
+   - `await` is used within functions declared with the `async` keyword.
+   - An `async` function always returns a Promise.
+
+2. **Pausing Execution**:
+   - When `await` is used with a Promise, it pauses the execution of the `async` function until the Promise is settled (either resolved or rejected).
+
+3. **Simplifying Promise Handling**:
+   - `await` makes asynchronous code look and behave more like synchronous code, reducing the complexity of chaining `then()` methods.
+
+##### Example:
+
+Without `await`:
+```javascript
+function fetchData() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("Data fetched");
+        }, 2000);
+    });
+}
+
+fetchData().then(data => {
+    console.log(data);
+});
+```
+
+With `await`:
+```javascript
+async function fetchData() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("Data fetched");
+        }, 2000);
+    });
+}
+
+async function getData() {
+    const data = await fetchData();
+    console.log(data);
+}
+
+getData();
+```
+
+##### Error Handling:
+You can use `try...catch` blocks to handle errors when using `await`.
+
+Example:
+```javascript
+async function fetchDataWithError() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            reject("Error fetching data");
+        }, 2000);
+    });
+}
+
+async function getData() {
+    try {
+        const data = await fetchDataWithError();
+        console.log(data);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+getData();
+```
+
+
+</div>
+</details>
+
+---
+
+
+
+### Write an async function using promises in JavaScript
+
+
+
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+```js
+// This function fetches data from a given URL and returns a promise.
+async function fetchData(url) {
+  try {
+    // Fetch data from the URL
+    const response = await fetch(url);
+
+    // Check if the response is okay (status code 200-299)
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Parse the JSON data from the response
+    const data = await response.json();
+
+    // Return the parsed data
+    return data;
+  } catch (error) {
+    // If there's an error, log it
+    console.error('There was a problem with the fetch operation:', error);
+  }
+}
+
+// Example usage:
+const url = 'https://api.example.com/data';
+
+fetchData(url)
+  .then(data => {
+    // Do something with the data
+    console.log(data);
+  })
+  .catch(error => {
+    // Handle any errors that were not caught in fetchData
+    console.error('Error fetching data:', error);
+  });
+
+```
+
+
+</div>
+</details>
+
+---
+
+
+
+### Write an asynchronous function using the Promise object instead of `await`.
+
+
+
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+```js
+// This function fetches data from a given URL and returns a promise.
+function fetchData(url) {
+  return new Promise((resolve, reject) => {
+    // Fetch data from the URL
+    fetch(url)
+      .then(response => {
+        // Check if the response is okay (status code 200-299)
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Resolve the promise with the parsed data
+        resolve(data);
+      })
+      .catch(error => {
+        // Reject the promise if there's an error
+        reject(`There was a problem with the fetch operation: ${error.message}`);
+      });
+  });
+}
+
+// Example usage:
+const url = 'https://api.example.com/data';
+
+fetchData(url)
+  .then(data => {
+    // Do something with the data
+    console.log(data);
+  })
+  .catch(error => {
+    // Handle any errors that were not caught in fetchData
+    console.error('Error fetching data:', error);
+  });
+
+
+```
+
+
+</div>
+</details>
+
+---
+
+
+
 ### Write a program to multiply two numbers without using the multiply sign in JavaScript
 
 **Input:**

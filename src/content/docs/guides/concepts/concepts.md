@@ -53,6 +53,113 @@ Understand the difference between global scope, function scope, and block scope.
   ></iframe>
 </div>
 
+
+
+### Explain event loop in Javascript
+
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+The event loop is a fundamental concept in JavaScript, particularly in the context of asynchronous programming. Understanding the event loop is crucial for grasping how JavaScript handles operations such as I/O, timers, and other asynchronous tasks.
+
+###### The Basics of the Event Loop
+
+JavaScript is single-threaded, meaning it can execute only one task at a time. However, it is designed to handle asynchronous operations efficiently without blocking the execution of other code. This is where the event loop comes into play.
+
+###### Components of the Event Loop
+
+1. **Call Stack**: This is where your code is executed. Functions are pushed onto the stack when they are called and popped off when they return.
+   
+2. **Web APIs**: These are APIs provided by the browser (or Node.js in the server environment) for performing asynchronous operations like `setTimeout`, `HTTP requests (fetch, XMLHttpRequest)`, `DOM events`, etc.
+
+3. **Callback Queue**: This is where callback functions are queued up to be executed once the call stack is empty.
+
+4. **Event Loop**: The event loop is a loop that continuously checks the call stack and the callback queue. If the call stack is empty, it takes the first callback from the queue and pushes it onto the call stack for execution.
+
+###### How the Event Loop Works
+
+1. **Synchronous Code Execution**:
+   - JavaScript starts executing code line by line, and synchronous functions are pushed onto the call stack and executed immediately.
+
+2. **Handling Asynchronous Code**:
+   - When an asynchronous operation is initiated (e.g., `setTimeout`), the browser API handles it outside the call stack. The main thread continues to execute the next lines of code.
+   
+   ```javascript
+   console.log('Start');
+
+   setTimeout(() => {
+     console.log('Timeout callback');
+   }, 1000);
+
+   console.log('End');
+   ```
+
+3. **Event Loop Check**:
+   - Once the synchronous code is executed and the call stack is empty, the event loop checks the callback queue.
+   - If there are callbacks in the queue, the event loop pushes them onto the call stack for execution.
+   
+   In the example above:
+   - "Start" is logged.
+   - `setTimeout` sets up a timer for 1 second, then the callback is placed in the callback queue.
+   - "End" is logged.
+   - After 1 second, the callback in the queue is moved to the call stack and executed, logging "Timeout callback".
+
+###### Microtasks and Macrotasks
+
+In addition to the callback queue, there are microtasks (or jobs) which have higher priority than macrotasks.
+
+- **Microtasks**: These include promises' `.then` callbacks and `process.nextTick` in Node.js. Microtasks are processed before the event loop moves to the next iteration.
+  
+- **Macrotasks**: These include `setTimeout`, `setInterval`, I/O operations, etc.
+
+The event loop always checks and clears all microtasks before handling any macrotasks.
+
+###### Example with Promises
+
+```javascript
+console.log('Start');
+
+setTimeout(() => {
+  console.log('setTimeout');
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('Promise');
+});
+
+console.log('End');
+```
+
+Output:
+```
+Start
+End
+Promise
+setTimeout
+```
+
+1. "Start" is logged.
+2. `setTimeout` schedules a macrotask with a delay of 0ms.
+3. `Promise.resolve().then` schedules a microtask.
+4. "End" is logged.
+5. The call stack is now empty, so the event loop checks the microtasks first.
+6. The microtask logs "Promise".
+7. The event loop then moves to the macrotasks and logs "setTimeout".
+
+###### Summary
+
+- **Call Stack**: Executes functions in a LIFO (Last In, First Out) order.
+- **Web APIs**: Handle asynchronous tasks.
+- **Callback Queue**: Holds callbacks to be executed by the event loop.
+- **Event Loop**: Moves tasks from the callback queue to the call stack when it's empty.
+- **Microtasks**: Higher priority tasks processed before macrotasks.
+
+Understanding the event loop helps you write more efficient asynchronous code and avoid common pitfalls such as race conditions and blocking the main thread.
+</div>
+</details>
+
+
 ####  Promise Execution
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>

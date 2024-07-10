@@ -233,6 +233,36 @@ function createFibonacciGenerator() {
     return result;
   };
 }
+
+const caller = createFibonacciGenerator()
+
+caller();
+caller();
+caller();
+```
+// Modify this so that, when passed an index get that fibnacci value
+
+```js
+let a = 0;
+let b = 1;
+let fibnacciSeries = []
+
+function getFibnacciAt(index) {
+    
+    for(let i = 0 ; i <= index; i++){
+        
+        let result = a ;
+        let temp = a + b;
+        a = b ;
+        b = temp;
+        fibnacciSeries = [...fibnacciSeries, result]
+    }
+    
+    console.log(fibnacciSeries[index])
+    
+}
+
+getFibnacciAt(25);
 ```
 
 <details>
