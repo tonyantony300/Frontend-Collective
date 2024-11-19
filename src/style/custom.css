@@ -1,0 +1,19 @@
+.sl-container {
+  margin-inline: 0px;
+}
+
+.content-panel {
+}
+
+.right-sidebar-container {
+  max-width: 400px;
+}
+
+.right-sidebar {
+  max-width: 400px;
+}
+
+.hero {
+  padding-top: 20px;
+  margin-inline: auto;
+}

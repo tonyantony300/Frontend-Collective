@@ -6,6 +6,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Frontend Collective",
+      customCss: ["./src/style/custom.css"],
       social: {
         github: "https://github.com/tonyantony300/Frontend-Collective",
       },

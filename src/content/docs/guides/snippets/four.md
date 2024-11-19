@@ -41,14 +41,14 @@ closure();
 
 
 ```js
-const debounce = (func, delay = 300) =>{
-    let timer;
-    return (...args) => {
-        clearTimeout(timer);
-        timer = setTimeout(() =>{
-            func.apply(this,args)
-        }, delay)
-    }
+const debounce = (func, delay = 300) => {
+  let timerId;
+  return function (...args) {
+    clearTimeout(timerId);
+     timerId = setTimeout(() => {
+        func.apply(this, args)
+     }, wait)
+}
 }
 
 const saveInput = (name) =>{
@@ -62,7 +62,60 @@ processChange("Foo");
 processChange("Foo");
 processChange("Foo");
 processChange("Foo");
+
 ```
+
+### Extending Debounce function
+
+- **Behavior**: Debounce with a cancel() method to cancel delayed invocations and a flush() method to immediately invoke them.
+
+
+```js
+export default function debounce(func, wait) {
+  let timerId;
+
+  function debounced(...args) {
+    const context = this;
+
+    clearTimeout(timerId);
+
+    timerId = setTimeout(() => {
+      func.apply(context, args);
+    }, wait);
+  }
+
+  debounced.cancel = function () {
+    clearTimeout(timerId);
+    timerId = null;
+  };
+
+  debounced.flush = function (...args) {
+    if (timerId) {
+      clearTimeout(timerId);
+      func.apply(this, args); 
+      timerId = null;
+    }
+  };
+
+  return debounced;
+}
+
+const saveInput = (name) => {
+  console.log('Save input', name);
+};
+
+const debouncedFunction = debounce(saveInput, 1000);
+
+// Regular debounce behavior
+debouncedFunction("Foo");
+
+// Cancel the pending invocation
+debouncedFunction.cancel();
+
+// Immediately invoke the debounced function
+debouncedFunction.flush("Bar");
+```
+
 
 
 ### Throttling Function
@@ -112,6 +165,19 @@ The returned function is the throttled version of `func`. It captures the curren
 In the example usage, we define a `log` function that logs a message with the current time. We then create a throttled version of `log` with a 2000ms wait time. We use `setInterval` to call the throttled function every 500ms, but due to throttling, `log` will only be invoked every 2000ms.
 </div>
 </details>
+
+
+
+### **Comparison**
+
+| Feature            | Debounce                               | Throttle                               |
+|---------------------|----------------------------------------|----------------------------------------|
+| **Execution timing**| After the event stops                 | At regular intervals                   |
+| **Usage goal**      | Limit executions **at the end** of rapid events | Limit executions to **once per interval** |
+| **Best for**        | User input (e.g., typing, resizing)    | Continuous actions (e.g., scrolling, dragging) |
+
+---
+
 
 ## Polyfills
 
