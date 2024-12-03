@@ -92,6 +92,52 @@ The code iterates through the array and pushes each element into the new array `
 
 ---
 
+### Flatten a nested array to a specified depth.
+
+Write a function that takes two arguments: a nested array and a number representing the depth to flatten. The function should return a new array that is flattened up to the specified depth.
+
+
+```js
+flatten([1, [2], [3, 4]], 1) -> [1, 2, 3, 4]
+flatten([1, [2, [3, 4]]], 1) -> [1, 2, [3, 4]]
+flatten([1, [2, [3, 4]]], 2) -> [1, 2, 3, 4]
+```
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+```js
+function flatten(array, depth = 1) {
+  if (depth < 1) return [...array]; // If depth is less than 1, return a shallow copy.
+
+  let result = [];
+  for (const item of array) {
+    if (Array.isArray(item) && depth > 0) {
+      // If the item is an array, recursively flatten it with reduced depth and spread the result.
+      result = [...result, ...flatten(item, depth - 1)];
+    } else {
+      // Otherwise, spread the non-array item into the result.
+      result = [...result, item];
+    }
+  }
+  return result;
+}
+
+// Examples:
+console.log(flatten([1, [2], [3, 4]], 1)); // [1, 2, 3, 4]
+console.log(flatten([1, [2, [3, 4]]], 1)); // [1, 2, [3, 4]]
+console.log(flatten([1, [2, [3, 4]]], 2)); // [1, 2, 3, 4]
+
+```
+
+explanation
+
+</div>
+</details>
+
+---
+
 
 
 ### Write a program for the following output using arrow function
