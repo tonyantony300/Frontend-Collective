@@ -108,7 +108,7 @@ export default defineConfig({
         },
         {
           label: "Accessibility",
-          link: "https://scottaohara.github.io/accessibility_interview_questions/",
+          link: "guides/ally/ally",
         },
         {
           label: "Testing",

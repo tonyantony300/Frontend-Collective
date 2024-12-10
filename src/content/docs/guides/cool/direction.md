@@ -41,3 +41,4 @@ This collection contains many questions author got asked along the way.
 ### Motivation and Philosophy
 
 Nobody is getting paid to be creative with questions on an interview. They ask what they got asked when they sat on the opposite side of similar interview. This is an effort on collecting such historically asked gauging questions on frontend expertise.
+

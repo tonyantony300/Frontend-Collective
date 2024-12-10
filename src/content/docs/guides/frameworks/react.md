@@ -63,7 +63,7 @@ Timeout: 0
 ---
 
 
-#####  How can you modify the code to ensure the setTimeout callback always logs the updated state value?
+###  How can you modify the code to ensure the setTimeout callback always logs the updated state value?
 
 
 ```javascript
@@ -87,8 +87,8 @@ function App() {
     }, 100);
   }, []);
 
-useEffect(() => {
-    setState((prevState) => prevState + 1);
+  useEffect(() => {
+      setState((prevState) => prevState + 1);
   }, []);
 
   return null;
@@ -115,6 +115,158 @@ TimeOut: 1
 </details>
 
 ---
+
+
+### Predict output 3
+
+
+```javascript
+import * as React from "react";
+import { useState, useEffect } from "react";
+import { createRoot } from "react-dom/client";
+import { screen, fireEvent } from "@testing-library/dom";
+
+function App() {
+  const [state, setState] = useState(0)
+  console.log(1)
+  
+  useEffect(() => {
+    console.log(2)
+  }, [state])
+
+  Promise.resolve().then(() => console.log(3))
+
+  setTimeout(() => console.log(4), 0)
+
+  const onClick = () => {
+    console.log(5)
+    setState(num => num + 1)
+    console.log(6)
+  }
+  return <div>
+    <button onClick={onClick}>click me</button>
+  </div>
+}
+
+const root = createRoot(document.getElementById('root'));
+root.render(<App/>)
+
+setTimeout(() => fireEvent.click(screen.getByText('click me')), 100)
+
+```
+
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+
+```plaintext
+1
+2
+3
+4
+5
+6
+1
+2
+3
+4
+```
+
+</div>
+</details>
+
+---
+
+
+
+
+### Predict output 4
+
+
+```javascript
+import * as React from "react";
+import { useState, useRef, useEffect } from "react";
+import { createRoot } from "react-dom/client";
+
+function App() {
+  const [show, setShow] = useState(true);
+  return <div>{show && <Child unmount={() => setShow(false)} />}</div>;
+}
+
+function Child({ unmount }) {
+  const isMounted = useIsMounted();
+  useEffect(() => {
+    console.log(isMounted);
+    Promise.resolve(true).then(() => {
+      console.log(isMounted);
+    });
+    unmount();
+  }, []);
+
+  return null;
+}
+
+function useIsMounted() {
+  const isMounted = useRef(false);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => (isMounted.current = false);
+  }, []);
+
+  return isMounted.current;
+}
+
+const root = createRoot(document.getElementById("root"));
+root.render(<App />);
+
+```
+
+
+<details>
+<summary> Answer </summary>
+<div style="background-color: rgba(100, 108, 255, 0.16); padding: 10px; margin-bottom: 10px; color: #fff; font-size: 14px; font-weight: 500;">
+
+
+```plaintext
+false
+false
+```
+
+Effects run after rendering
+
+
+Synchronous operations:
+
+The useEffect callback runs
+First console.log executes (synchronously)
+Promise.resolve is created and its .then callback is queued to the microtask queue
+unmount() (setShow(false)) is called synchronously
+React processes this state update immediately in the same synchronous execution
+Component unmounts, running cleanup effects
+
+
+Microtask queue:
+
+After the synchronous code finishes, the microtask (.then callback) executes
+By this time, the component is already unmounted
+
+The key insight is that even though useEffect itself is asynchronous, once React starts running effects, it follows a specific order:
+
+Parent effects before child effects (if effects in custom hooks)
+All effect cleanups run before all new effects
+Effects run in the order they were defined
+
+
+</div>
+</details>
+
+---
+
+
+
 
 
 ```plaintext
