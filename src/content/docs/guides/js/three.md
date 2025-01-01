@@ -4,6 +4,105 @@ description: This should be comprehensive
 ---
 
 
+
+### Predict
+
+```js
+function bar() {
+  return foo;
+  foo = 10;
+  function foo() {}
+  var foo = "11";
+}
+alert(typeof bar());
+```
+
+After hoisting, the function looks like this:
+
+function bar() {
+  // Hoisting:
+  function foo() {}  // Function declaration hoisted first
+  var foo;           // Variable declaration hoisted after the function (no initialization)
+
+  // Actual execution starts here:
+  return foo;   // `foo` is still the hoisted function
+  foo = 10;     // This line is never reached due to `return`
+  foo = "11";   // Dead code (never executed)
+}
+
+---
+
+### Why is `foo` a Function at `return foo`?
+1. **Function Declaration Hoisting**:
+   - `function foo()` is hoisted **above the `return` statement** and initializes `foo` as a function.
+
+2. **`var foo` Declaration**:
+   - The `var foo` declaration is hoisted **after** the function, but it doesn't overwrite the function. At this point, `foo` still refers to the function.
+
+3. **`return foo` Executes Before Any Assignments**:
+   - The `return foo` statement is executed **before** any reassignment like `foo = 10` or `foo = "11"`.  
+   - Thus, `foo` still refers to the hoisted function.
+
+4. **Dead Code**:
+   - Lines after the `return foo` are **not executed** because `return` ends the function execution.
+
+---
+
+
+
+### Predict 2
+```js
+for (var i = 0; i < 4; i++) { 
+  setTimeout(() => { 
+    console.log(i); 
+  }, i * 1000); 
+} 
+```
+Outputs 
+
+4
+4
+4
+4
+
+why ? 
+
+This is a classic JavaScript closure and scope issue. Let me explain why you're seeing four "4"s instead of 0, 1, 2, 3:
+
+The issue occurs because `var` has function scope, and the value of `i` is shared across all the timeouts. By the time the callbacks actually execute, the loop has already completed and `i` has reached 4. All four callbacks then reference the same `i`, which is now 4.
+
+Here are three ways to fix this:
+
+1. Using `let` instead of `var` (recommended modern solution):
+```javascript
+for (let i = 0; i < 4; i++) {
+  setTimeout(() => {
+    console.log(i);
+  }, i * 1000);
+}
+```
+
+2. Using an IIFE (Immediately Invoked Function Expression) to create a new scope:
+```javascript
+for (var i = 0; i < 4; i++) {
+  (function(j) {
+    setTimeout(() => {
+      console.log(j);
+    }, j * 1000);
+  })(i);
+}
+```
+
+3. Passing the value as a parameter to setTimeout:
+```javascript
+for (var i = 0; i < 4; i++) {
+  setTimeout(console.log, i * 1000, i);
+}
+```
+
+The key difference is that `let` creates a new binding for each loop iteration, while `var` creates a single binding for the entire function scope. When using `let`, each callback function gets its own copy of `i`, preserved from the iteration in which it was created.
+
+
 ## DOM related Javascript questions
 
 - Describe event bubbling.
